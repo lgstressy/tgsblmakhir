@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daftar materi aljabar">
+    <title>Materi Aljabar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            color: white;
+            position: relative;
+        }
+
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .content {
+            padding: 30px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            position: relative;
+            max-width: 1000px;
+            margin: 30px auto;
+            z-index: 1;
+            overflow-y: auto;
+        }
+
+        .materi-list {
+            margin: 20px auto;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.7);
+            overflow-y: auto;
+        }
+
+        .materi-list ul {
+            list-style-type: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .materi-list ul li {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            text-align: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .materi-list ul li img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .materi-list ul li:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            color: white;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+
+        .popup img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .popup .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .popup .buttons button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .popup .buttons button:hover {
+            background: #0056b3;
+        }
+
+        #soal-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #soal-section ul li {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .btn-nav {
+            margin: 10px auto;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background: #ffc107;
+            color: #000;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-nav:hover {
+            background: #e0a800;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <video id="bg-video" autoplay loop muted>
+        <source src="bgmateri.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="content">
+        <div id="materi-section" class="materi-list">
+            <h2>Daftar Materi</h2>
+            <ul>
+                <li onclick="showMateri('Materi 1','Materi1.png' , 'materilengkap1.png', '', ['Soal 1: Simplify x + 5 = 10', 'Soal 2: Solve 2x - 3 = 7'])">
+                    <img src="materi1.png" alt="Materi 1">
+                    <strong>Materi 1</strong>: Pengenalan Bentuk Aljabar
+                </li>
+                <li onclick="showMateri('Materi 2','Materi2.png', 'materilngkap32.png', '', ['Soal 1: Solve 3x + 5 = 20', 'Soal 2: Factor x^2 - 16 = 0'])">
+                    <img src="materi2.png" alt="Materi 2">
+                    <strong>Materi 2</strong>: Operasi Dasar Aljabar
+                </li>
+                <li onclick="showMateri('Materi 3','Materi3.png' ,'materilengkap3.png', '', ['Soal 1: A car travels 50 km...', 'Soal 2: Solve 2(x - 3) = 10'])">
+                    <img src="materi3.png" alt="Materi 3">
+                    <strong>Materi 3</strong>: Masalah Kontekstual
+                </li>
+            </ul>
+            <button class="btn-nav" onclick="window.location.href='halamanutama.html'">Kembali ke Halaman Utama</button>
+        </div>
+    </div>
+
+    <div id="popup-materi" class="popup">
+        <img id="popup-img" src="" alt="Materi">
+        <div class="buttons">
+            <button onclick="showPenjelasan()">Read More</button>
+            <button onclick="closePopup('popup-materi')">Kembali</button>
+        </div>
+    </div>
+
+    <div id="penjelasan-section" class="popup">
+        <h3 id="penjelasan-title"></h3>
+        <img id="penjelasan-image" src="" alt="Penjelasan Lengkap">
+        <div class="buttons">
+            <button onclick="showSoal()">Contoh Soal</button>
+            <button onclick="closePopup('penjelasan-section')">Kembali</button>
+        </div>
+    </div>
+
+    <div id="soal-section" class="popup">
+        <h3>Contoh Soal</h3>
+        <ul id="soal-list"></ul>
+        <div class="buttons">
+            <button onclick="closePopup('soal-section')">Kembali</button>
+        </div>
+    </div>
+
+    <script>
+        function showMateri(title, thumbnail, detailedImage, description, soal) {
+            document.getElementById('popup-img').src = thumbnail;
+            document.getElementById('penjelasan-image').src = detailedImage;
+            document.getElementById('popup-materi').style.display = 'block';
+            sessionStorage.setItem('title', title);
+            sessionStorage.setItem('description', description);
+            sessionStorage.setItem('soal', JSON.stringify(soal));
+        }
+
+        function showPenjelasan() {
+            document.getElementById('penjelasan-title').textContent = sessionStorage.getItem('title');
+            document.getElementById('popup-materi').style.display = 'none';
+            document.getElementById('penjelasan-section').style.display = 'block';
+        }
+
+        function showSoal() {
+            const soalList = JSON.parse(sessionStorage.getItem('soal'));
+            const soalSection = document.getElementById('soal-list');
+            soalSection.innerHTML = '';
+            soalList.forEach((soal) => {
+                const li = document.createElement('li');
+                li.textContent = soal;
+                soalSection.appendChild(li);
+            });
+            document.getElementById('penjelasan-section').style.display = 'none';
+            document.getElementById('soal-section').style.display = 'block';
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+    </script>
+</body>
+</html>
